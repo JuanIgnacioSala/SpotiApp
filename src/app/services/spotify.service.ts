@@ -16,7 +16,7 @@ getNewReleases(){
 
   const headers = new HttpHeaders({
     'Authorization':'Bearer BQCoDobnBysOC01UFeAyZEtpW_3cKi1ebAtfY-lOAfuZIuAShU7g4qJvdExoCcUhtbHXIdd0hLiRwZEyx5c'
-  })
+  }) 
 
   return this.http.get('https://api.spotify.com/v1/browse/new-releases?country=AR&limit=20', {headers})
   .pipe( map( data =>{
