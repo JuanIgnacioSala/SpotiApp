@@ -12,25 +12,37 @@ export class SpotifyService {
     console.log('Spotify service listo');
    }
 
-getNewReleases(){ 
+   getQuery(query:string){
+     const url = `https://api.spotify.com/v1/${ query }`;
 
-  const headers = new HttpHeaders({
-    'Authorization':'Bearer BQCoDobnBysOC01UFeAyZEtpW_3cKi1ebAtfY-lOAfuZIuAShU7g4qJvdExoCcUhtbHXIdd0hLiRwZEyx5c'
-  }) 
-
-  return this.http.get('https://api.spotify.com/v1/browse/new-releases?country=AR&limit=20', {headers})
-  .pipe( map( data =>{
-    return data['albums'].items;
-  }))
-} 
+     const headers = new HttpHeaders({
+      'Authorization': 'Bearer BQCFIp0jGmkzveWufbxG1Y2C4iX_IMkLiKBM9uvmH_eHZsAv2G0-Anx6d3Ks4uxVB9N10-2hdpWzAV_aYl0'
+    });
+     return this.http.get(url, {headers})
+   }
 
 
-getArtist(termino: string){
-  const headers = new HttpHeaders({
-    'Authorization':'Bearer BQCoDobnBysOC01UFeAyZEtpW_3cKi1ebAtfY-lOAfuZIuAShU7g4qJvdExoCcUhtbHXIdd0hLiRwZEyx5c'
-  })
+getNewReleases(){
 
-  return this.http.get(`https://api.spotify.com/v1/search?q=${termino}&type=artist&market=AR&limit=10`, {headers});
+  return this.getQuery('browse/new-releases?country=AR&limit=20')
+  .pipe( map( data => data['albums'].items));
+
+  
+}
+
+
+
+getArtists(termino: string){
+
+  return this.getQuery(`search?q=${termino}&type=artist&market=AR&limit=10`)
+    .pipe( map( data => data['artists'].items));
+
+}
+getArtist(id: string){
+
+  return this.getQuery(`artists/${id}`)
+    .pipe( map( data => data['artists'].items));
+
 }
 }
 
