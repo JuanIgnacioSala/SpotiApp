@@ -12,22 +12,22 @@ import { SpotifyService } from '../../services/spotify.service';
 })
 export class HomeComponent {
 
-  loading:boolean;
+  loading: boolean;
 
   newSongs: any[] = [];
 
 
   constructor( private spotify: SpotifyService) {
 
-    this.loading=true;
+    this.loading = true;
 
     this.spotify.getNewReleases()
-    .subscribe((data:any)=>{
+    .subscribe((data: any) => {
       console.log(data);
       this.newSongs = data;
     });
 
-    this.loading=false;
+    this.loading = false;
 
   }
 
