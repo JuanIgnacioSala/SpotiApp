@@ -21,9 +21,9 @@
     </div>
 </div>
 
-<div class="row m-5">
+<div class="row m-5 full-width" *ngIf="!loadingArtist">
     <div class="col">
-        <table class="table" style="color: white;">
+        <table class="table" style="color: rgb(30,215,96);">
             <thead>
                 <tr>
                     <th>Foto</th>
@@ -33,11 +33,16 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let tracks of topTracks">
-                    <td></td>
-                    <td>{{tracks.album.name}}</td>
-                    <td>{{tracks.name}}</td>
-                    <td></td>
+                <tr *ngFor="let track of topTracks">
+                    <td>
+                        <img [src]="track.album.images | noimage" alt="" class="img-thumb">
+                    </td>
+                    <td>{{track.album.name}}</td>
+                    <td>{{track.name}}</td>
+                    <td>
+                        <!-- <audio [src]="track.preview_url" controls></audio> -->
+                        <iframe [src]=" track.id | domseguro " width=" 250 " height="80 " frameborder="0 " allowtransparency="true " allow="encrypted-media "></iframe>
+                    </td>
                 </tr>
             </tbody>
         </table>

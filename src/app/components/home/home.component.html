@@ -1,5 +1,12 @@
 <app-loading *ngIf="loading"></app-loading>
 
+<div class="alert alert-danger text-center animated fadeIn" *ngIf="error">
+    <h3>
+        <i class="fas fa-exclamation-triangle"></i> ERROR <i class="fas fa-exclamation-triangle"></i>
+    </h3>
+    <hr>
+    <p> {{msgError}}</p>
+</div>
 
 
 <app-cards [items]="newSongs"></app-cards>

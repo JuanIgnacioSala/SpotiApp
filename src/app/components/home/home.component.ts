@@ -16,15 +16,22 @@ export class HomeComponent {
 
   newSongs: any[] = [];
 
+  error : boolean;
+  msgError: string;
 
   constructor( private spotify: SpotifyService) {
 
     this.loading = true;
+    this.error=false;
 
     this.spotify.getNewReleases()
     .subscribe((data: any) => {
       console.log(data);
       this.newSongs = data;
+    }, (err)=> {
+      this.error=true;
+      console.log(err);
+      this.msgError= err.error.error.message;
     });
 
     this.loading = false;
